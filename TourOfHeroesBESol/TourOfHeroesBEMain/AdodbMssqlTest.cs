@@ -29,9 +29,8 @@ namespace TourOfHeroesBEMain
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader[0]);
-                string username = reader[1].ToString();
-                string password = reader[2].ToString();
-                Console.WriteLine($"ID: {id}    Username: {username}    Password: {password}");
+                string name = reader[1].ToString();
+                Console.WriteLine($"ID: {id}    Name: {name}");
             }
             reader.Close();
             command.Dispose();
