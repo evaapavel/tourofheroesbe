@@ -60,6 +60,49 @@ namespace TourOfHeroesBERest.Controllers
 
 
 
+        //public Hero Get(int id)
+        [HttpGet("{id:int}")]
+        public IActionResult Get(int id)
+        {
+            Hero hero = new Hero { ID = id };
+            try
+            {
+                hero = _heroService.LoadHero(id);
+            }
+            catch (Exception)
+            {
+                // No such hero (non-existing ID).
+                // HTTP status code: 404 (Not Found)
+                return NotFound(new { id = hero.ID });
+            }
+            // HTTP status code: 200 (OK)
+            return Ok(hero);
+        }
+
+
+
+        //// REST API path: GET /api/heroes/11
+        //[HttpGet("{id:int}")]
+        //public async Task<IActionResult> Load(int id)
+        //{
+        //    Hero hero = new Hero { ID = id };
+        //    try
+        //    {
+        //        hero = _heroService.LoadHero(id);
+        //    }
+        //    //catch (Exception ex)
+        //    catch(Exception)
+        //    {
+        //        // No such hero (non-existing ID).
+        //        // HTTP status code: 404 (Not Found)
+        //        //return NotFound();
+        //        //return NotFound(hero);
+        //        return NotFound(new { id = hero.ID });
+        //    }
+        //    // HTTP status code: 200 (OK)
+        //    return Ok(hero);
+        //}
+
     }
 
 

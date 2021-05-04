@@ -35,6 +35,15 @@ namespace TourOfHeroesBECommon.Services
 
 
 
+        public Hero LoadHero(int id)
+        {
+            Hero heroToLoad = new Hero { ID = id };
+            Hero heroLoaded = this.heroRepo.Load(heroToLoad);
+            return heroLoaded;
+        }
+
+
+
         public void SaveHero(Hero hero)
         {
             if (hero.ID == 0)
