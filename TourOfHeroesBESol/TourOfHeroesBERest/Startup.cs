@@ -6,22 +6,37 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
 namespace TourOfHeroesBERest
 {
+
+
+
     public class Startup
     {
+
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+
+
+
         public IConfiguration Configuration { get; }
+
+
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -41,8 +56,13 @@ namespace TourOfHeroesBERest
                         // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
                         builder.WithOrigins("http://localhost:4200")
                             //.WithHeaders("Access-Control-Allow-Methods: GET, PUT, POST, DELETE")
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
+                            //.AllowAnyMethod()
+                            //.AllowAnyHeader()
+                            //.WithHeaders("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS")
+                            //.WithHeaders(HeaderNames.ContentType, "Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS")
+                            //.WithExposedHeaders
+                            .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+                            .WithHeaders(HeaderNames.ContentType)
                             ;
                     });
             }
@@ -54,6 +74,8 @@ namespace TourOfHeroesBERest
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TourOfHeroesBERest", Version = "v1" });
             });
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,6 +98,23 @@ namespace TourOfHeroesBERest
             // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing)
             app.UseCors();
 
+            //// Another CORS issue.
+            //// Firefox:
+            //// Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
+            //// Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: CORS request did not succeed).
+            //// Object { headers: {…}, status: 0, statusText: "Unknown Error", url: "http://localhost:26952/api/heroes", ok: false, name: "HttpErrorResponse", message: "Http failure response for http://localhost:26952/api/heroes: 0 Unknown Error", error: error }
+            //app.Use(
+            //    (context, next) =>
+            //    {
+            //        context.Response.OnStarting(() =>
+            //        {
+            //            context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+            //            return Task.FromResult(0);
+            //        });
+            //        return next();
+            //    }
+            //);
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -83,5 +122,11 @@ namespace TourOfHeroesBERest
                 endpoints.MapControllers();
             });
         }
+
+
+
     }
+
+
+
 }
