@@ -60,9 +60,13 @@ namespace TourOfHeroesBECommon.Services
             if (hero.ID == 0)
             {
                 this.heroRepo.Add(hero);
+                // Find all heroes with the given name.
                 List<Hero> listOfHeroesToProcess = (List<Hero>) this.heroRepo.FindList(hero);
+                // Sort the list of heroes by their ID's in an ascending order.
                 listOfHeroesToProcess.Sort((h1, h2) => h1.ID - h2.ID);
-                heroToReturn = listOfHeroesToProcess[0];
+                // Get the last hero (with the greatest ID).
+                //heroToReturn = listOfHeroesToProcess[0];
+                heroToReturn = listOfHeroesToProcess[listOfHeroesToProcess.Count - 1];
             }
             else
             {
