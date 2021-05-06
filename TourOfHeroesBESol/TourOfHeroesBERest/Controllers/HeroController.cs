@@ -38,16 +38,30 @@ namespace TourOfHeroesBERest.Controllers
 
 
         // REST API path: GET /api/heroes
+        // REST API path: GET /api/heroes/?name=Ma
         //public IEnumerable<Hero> Get()
         [HttpGet]
-        [ExactQueryParam()]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] Hero hero)
         {
-            IEnumerable<Hero> heroes = _heroService.GetListOfHeroes();
+            IEnumerable<Hero> heroes = _heroService.SearchHeroes(hero);
             // HTTP status code: 200 (OK)
             return Ok(heroes);
             //return heroes;
         }
+
+
+
+        //// REST API path: GET /api/heroes
+        ////public IEnumerable<Hero> Get()
+        //[HttpGet]
+        //[ExactQueryParam()]
+        //public IActionResult Get()
+        //{
+        //    IEnumerable<Hero> heroes = _heroService.GetListOfHeroes();
+        //    // HTTP status code: 200 (OK)
+        //    return Ok(heroes);
+        //    //return heroes;
+        //}
 
 
 
@@ -62,17 +76,17 @@ namespace TourOfHeroesBERest.Controllers
 
 
 
-        // REST API path: GET /api/heroes/?name=Ma
-        //public IEnumerable<Hero> Get()
-        [HttpGet]
-        [ExactQueryParam("name")]
-        public IActionResult Get([FromQuery(Name = "name")] string namePattern)
-        {
-            IEnumerable<Hero> heroes = _heroService.FindListOfHeroes(namePattern);
-            // HTTP status code: 200 (OK)
-            return Ok(heroes);
-            //return heroes;
-        }
+        //// REST API path: GET /api/heroes/?name=Ma
+        ////public IEnumerable<Hero> Get()
+        //[HttpGet]
+        //[ExactQueryParam("name")]
+        //public IActionResult Get([FromQuery(Name = "name")] string namePattern)
+        //{
+        //    IEnumerable<Hero> heroes = _heroService.FindListOfHeroes(namePattern);
+        //    // HTTP status code: 200 (OK)
+        //    return Ok(heroes);
+        //    //return heroes;
+        //}
 
 
 

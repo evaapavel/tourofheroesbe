@@ -44,6 +44,23 @@ namespace TourOfHeroesBECommon.Services
 
 
 
+        public IList<Hero> SearchHeroes(Hero hero)
+        {
+            if ( (hero.ID == 0) && (hero.Name == null) )
+            {
+                // Empty hero-search criteria.
+                return GetListOfHeroes();
+            }
+            if ((hero.ID == 0) && (hero.Name != null))
+            {
+                // Only the Name property has been set.
+                return FindListOfHeroes(hero.Name);
+            }
+            return this.heroRepo.FindList(hero);
+        }
+
+
+
         public bool ExistsHero(int id)
         {
             Hero heroToCheck = new Hero { ID = id };
