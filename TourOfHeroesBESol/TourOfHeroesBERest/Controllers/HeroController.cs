@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 using TourOfHeroesBECommon.BusinessObjects;
 using TourOfHeroesBECommon.Services;
-
-
+using TourOfHeroesBERest.Attributes;
 
 namespace TourOfHeroesBERest.Controllers
 {
@@ -41,6 +40,7 @@ namespace TourOfHeroesBERest.Controllers
         // REST API path: GET /api/heroes
         //public IEnumerable<Hero> Get()
         [HttpGet]
+        [ExactQueryParam()]
         public IActionResult Get()
         {
             IEnumerable<Hero> heroes = _heroService.GetListOfHeroes();
@@ -59,6 +59,20 @@ namespace TourOfHeroesBERest.Controllers
         //    // HTTP status code: 200 (OK)
         //    return Ok(heroes);
         //}
+
+
+
+        // REST API path: GET /api/heroes/?name=Ma
+        //public IEnumerable<Hero> Get()
+        [HttpGet]
+        [ExactQueryParam("name")]
+        public IActionResult Get([FromQuery(Name = "name")] string namePattern)
+        {
+            IEnumerable<Hero> heroes = _heroService.FindListOfHeroes(namePattern);
+            // HTTP status code: 200 (OK)
+            return Ok(heroes);
+            //return heroes;
+        }
 
 
 

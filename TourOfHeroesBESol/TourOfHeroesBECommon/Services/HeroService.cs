@@ -35,6 +35,15 @@ namespace TourOfHeroesBECommon.Services
 
 
 
+        public IList<Hero> FindListOfHeroes(string namePattern)
+        {
+            Hero searchCriteriaAsHero = new Hero { Name = $"*{namePattern}*" };
+            //Hero searchCriteriaAsHero = new Hero { Name = namePattern };
+            return this.heroRepo.FindList(searchCriteriaAsHero);
+        }
+
+
+
         public bool ExistsHero(int id)
         {
             Hero heroToCheck = new Hero { ID = id };
