@@ -39,13 +39,14 @@ namespace TourOfHeroesBERest.Controllers
 
 
         // REST API path: GET /api/heroes
+        //public IEnumerable<Hero> Get()
         [HttpGet]
-        public IEnumerable<Hero> Get()
+        public IActionResult Get()
         {
             IEnumerable<Hero> heroes = _heroService.GetListOfHeroes();
-            //return heroes.ToArray<Hero[]>();
-            return heroes.ToArray<Hero>();
-            //return heroes.ToArray();
+            // HTTP status code: 200 (OK)
+            return Ok(heroes);
+            //return heroes;
         }
 
 
@@ -79,6 +80,7 @@ namespace TourOfHeroesBERest.Controllers
             }
             // HTTP status code: 200 (OK)
             return Ok(hero);
+            // return hero;
         }
 
 
@@ -107,21 +109,6 @@ namespace TourOfHeroesBERest.Controllers
 
 
 
-        //// Another CORS issue.
-        //// Firefox:
-        //// Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
-        //// Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: CORS request did not succeed).
-        //// Object { headers: {…}, status: 0, statusText: "Unknown Error", url: "http://localhost:26952/api/heroes", ok: false, name: "HttpErrorResponse", message: "Http failure response for http://localhost:26952/api/heroes: 0 Unknown Error", error: error }
-        //[HttpOptions]
-        //public IActionResult Options()
-        //{
-        //    this.Response.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-        //    return Ok();
-        //}
-
-
-
-        //public IActionResult Put([FromForm] Hero hero)
         // REST API path: PUT /api/heroes
         [HttpPut]
         public IActionResult Put(Hero hero)

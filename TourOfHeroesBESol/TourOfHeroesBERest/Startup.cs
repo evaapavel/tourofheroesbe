@@ -52,15 +52,12 @@ namespace TourOfHeroesBERest
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        //builder.WithOrigins("http://localhost:4200");
-                        // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
                         builder.WithOrigins("http://localhost:4200")
-                            //.WithHeaders("Access-Control-Allow-Methods: GET, PUT, POST, DELETE")
-                            //.AllowAnyMethod()
-                            //.AllowAnyHeader()
-                            //.WithHeaders("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS")
-                            //.WithHeaders(HeaderNames.ContentType, "Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS")
-                            //.WithExposedHeaders
+                            // Another CORS issue.
+                            // Firefox:
+                            // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
+                            // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: CORS request did not succeed).
+                            // Object { headers: {…}, status: 0, statusText: "Unknown Error", url: "http://localhost:26952/api/heroes", ok: false, name: "HttpErrorResponse", message: "Http failure response for http://localhost:26952/api/heroes: 0 Unknown Error", error: error }
                             .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
                             .WithHeaders(HeaderNames.ContentType)
                             ;
@@ -97,23 +94,6 @@ namespace TourOfHeroesBERest
             // Firefox:
             // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing)
             app.UseCors();
-
-            //// Another CORS issue.
-            //// Firefox:
-            //// Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
-            //// Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: CORS request did not succeed).
-            //// Object { headers: {…}, status: 0, statusText: "Unknown Error", url: "http://localhost:26952/api/heroes", ok: false, name: "HttpErrorResponse", message: "Http failure response for http://localhost:26952/api/heroes: 0 Unknown Error", error: error }
-            //app.Use(
-            //    (context, next) =>
-            //    {
-            //        context.Response.OnStarting(() =>
-            //        {
-            //            context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-            //            return Task.FromResult(0);
-            //        });
-            //        return next();
-            //    }
-            //);
 
             app.UseAuthorization();
 
