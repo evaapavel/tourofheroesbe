@@ -51,45 +51,6 @@ namespace TourOfHeroesBERest.Controllers
 
 
 
-        //// REST API path: GET /api/heroes
-        ////public IEnumerable<Hero> Get()
-        //[HttpGet]
-        //[ExactQueryParam()]
-        //public IActionResult Get()
-        //{
-        //    IEnumerable<Hero> heroes = _heroService.GetListOfHeroes();
-        //    // HTTP status code: 200 (OK)
-        //    return Ok(heroes);
-        //    //return heroes;
-        //}
-
-
-
-        //// REST API path: GET /api/heroes
-        //[HttpGet]
-        //public async Task<IActionResult> GetList()
-        //{
-        //    IEnumerable<Hero> heroes = _heroService.GetListOfHeroes();
-        //    // HTTP status code: 200 (OK)
-        //    return Ok(heroes);
-        //}
-
-
-
-        //// REST API path: GET /api/heroes/?name=Ma
-        ////public IEnumerable<Hero> Get()
-        //[HttpGet]
-        //[ExactQueryParam("name")]
-        //public IActionResult Get([FromQuery(Name = "name")] string namePattern)
-        //{
-        //    IEnumerable<Hero> heroes = _heroService.FindListOfHeroes(namePattern);
-        //    // HTTP status code: 200 (OK)
-        //    return Ok(heroes);
-        //    //return heroes;
-        //}
-
-
-
         // REST API path: GET /api/heroes/11
         //public Hero Get(int id)
         [HttpGet("{id:int}")]
@@ -110,30 +71,6 @@ namespace TourOfHeroesBERest.Controllers
             return Ok(hero);
             // return hero;
         }
-
-
-
-        //// REST API path: GET /api/heroes/11
-        //[HttpGet("{id:int}")]
-        //public async Task<IActionResult> Load(int id)
-        //{
-        //    Hero hero = new Hero { ID = id };
-        //    try
-        //    {
-        //        hero = _heroService.LoadHero(id);
-        //    }
-        //    //catch (Exception ex)
-        //    catch(Exception)
-        //    {
-        //        // No such hero (non-existing ID).
-        //        // HTTP status code: 404 (Not Found)
-        //        //return NotFound();
-        //        //return NotFound(hero);
-        //        return NotFound(new { id = hero.ID });
-        //    }
-        //    // HTTP status code: 200 (OK)
-        //    return Ok(hero);
-        //}
 
 
 
@@ -165,57 +102,6 @@ namespace TourOfHeroesBERest.Controllers
 
 
 
-        ////[HttpPut]
-        ////[Route("{id}")]
-        //// REST API path: PUT /api/heroes/11
-        ////[HttpPut("{id}")]
-        //[HttpPut("{id:int}")]
-        //public async Task<IActionResult> Store(int id, [FromForm] Hero hero)
-        //{
-        //    _logger.LogInformation(hero.ToString());
-
-        //    //if ( (hero.ID != 0) && (id != hero.ID) )
-        //    //{
-        //    //    throw new InvalidOperationException($"URI id ({id}) does not correpond to hero ID ({hero.ID}).");
-        //    //}
-        //    //if (hero.ID == 0)
-        //    //{
-        //    //    hero.ID = id;
-        //    //}
-
-        //    //if ((hero.ID != 0) && (id != hero.ID))
-        //    //{
-        //    //    throw new InvalidOperationException($"URI id ({id}) does not correpond to hero ID ({hero.ID}).");
-        //    //}
-        //    //if (hero.ID == 0)
-        //    //{
-        //    //    hero.ID = id;
-        //    //}
-
-        //    if (id != hero.ID)
-        //    {
-        //        throw new InvalidOperationException($"URI id ({id}) does not correpond to hero ID ({hero.ID}).");
-        //    }
-        //    // Is there a hero with the given ID?
-        //    bool exists = _heroService.ExistsHero(id);
-        //    if (!exists)
-        //    {
-        //        // HTTP status code: 404 (Not Found)
-        //        return NotFound(hero);
-        //    }
-
-        //    // Update the hero.
-        //    _heroService.SaveHero(hero);
-
-        //    // REST API recommends either a status code of 200 (OK) or 204 (No Content) to be returned.
-        //    // HTTP status code: 200 (OK)
-        //    //return Ok(hero);
-        //    // HTTP status code: 204 (No Content)
-        //    return NoContent();
-        //}
-
-
-
         // REST API path: POST /api/heroes
         // Data is in the request body in JSON format.
         // Therefore, we have an HTTP header of "Content-Type", with a value of "application/json".
@@ -230,28 +116,6 @@ namespace TourOfHeroesBERest.Controllers
             // HTTP status code: 201 (Created)
             return Created(this.Request.Path, newHero);
         }
-
-
-
-        ////public async Task<IActionResult> Add(Hero hero)
-        ////[HttpPost]
-        ////[Route("0")]
-        ////[HttpPost("0")]
-        //// REST API recommends paths with no ID specification.
-        //// Data (properties of a new hero) is taken from the HTML form.
-        //// REST API path: POST /api/heroes
-        //[HttpPost]
-        //public async Task<IActionResult> Add([FromForm] Hero hero)
-        //{
-        //    _logger.LogInformation(hero.ToString());
-
-        //    // Add a new hero.
-        //    _heroService.SaveHero(hero);
-
-        //    // HTTP status code: 201 (Created)
-        //    // HTTP 'Location' header: /detail/{id} containing the new ID, e.g. /detail/100
-        //    return CreatedAtAction(nameof(Load), new { id = hero.ID }, hero);
-        //}
 
 
 
@@ -276,37 +140,6 @@ namespace TourOfHeroesBERest.Controllers
             return Ok(heroDeleted);
             //return Ok(new { id = heroDeleted.ID });
         }
-
-
-
-        ////[HttpDelete]
-        ////[Route("{id}")]
-        //// REST API path: DELETE /api/heroes/31
-        ////[HttpDelete("{id}")]
-        //[HttpDelete("{id:int}")]
-        //public async Task<IActionResult> Remove(int id)
-        //{
-        //    Hero hero = new Hero { ID = id };
-        //    _logger.LogInformation(hero.ToString());
-
-        //    // Is there a hero with the given ID?
-        //    bool exists = _heroService.ExistsHero(id);
-        //    if (!exists)
-        //    {
-        //        // HTTP status code: 404 (Not Found)
-        //        //return NotFound(hero);
-        //        return NotFound(new { id = hero.ID });
-        //    }
-
-        //    // Delete the hero.
-        //    _heroService.DeleteHero(id);
-
-        //    // HTTP status code 202 (Accepted) is used for queued actions that take a long time to complete.
-        //    //return AcceptedAtAction(nameof(GetList), new { id = hero.ID }, hero);
-        //    // HTTP status code: 200 (OK)
-        //    //return Ok(hero);
-        //    return Ok(new { id = hero.ID });
-        //}
 
 
 
