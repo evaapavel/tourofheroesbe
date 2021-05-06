@@ -35,6 +35,15 @@ namespace TourOfHeroesBECommon.Services
 
 
 
+        public bool ExistsHero(int id)
+        {
+            Hero heroToCheck = new Hero { ID = id };
+            bool exists = this.heroRepo.Exists(heroToCheck);
+            return exists;
+        }
+
+
+
         public Hero LoadHero(int id)
         {
             Hero heroToLoad = new Hero { ID = id };

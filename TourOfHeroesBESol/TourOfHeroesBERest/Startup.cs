@@ -37,7 +37,13 @@ namespace TourOfHeroesBERest
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200");
+                        //builder.WithOrigins("http://localhost:4200");
+                        // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:26952/api/heroes. (Reason: Did not find method in CORS header ‘Access-Control-Allow-Methods’).
+                        builder.WithOrigins("http://localhost:4200")
+                            //.WithHeaders("Access-Control-Allow-Methods: GET, PUT, POST, DELETE")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            ;
                     });
             }
             );
