@@ -77,10 +77,13 @@ namespace TourOfHeroesBECommon.Services
 
 
 
-        public void DeleteHero(int id)
+        //public void DeleteHero(int id)
+        public Hero DeleteHero(int id)
         {
             Hero heroToDelete = new Hero { ID = id };
+            Hero heroToDeleteFound = this.heroRepo.Load(heroToDelete);
             this.heroRepo.Remove(heroToDelete);
+            return heroToDeleteFound;
         }
 
 

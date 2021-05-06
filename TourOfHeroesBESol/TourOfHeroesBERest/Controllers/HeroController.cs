@@ -227,6 +227,61 @@ namespace TourOfHeroesBERest.Controllers
 
 
 
+        // REST API path: DELETE /api/heroes/31
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            _logger.LogInformation(id.ToString());
+
+            // Is there a hero with the given ID?
+            bool exists = _heroService.ExistsHero(id);
+            if (!exists)
+            {
+                // HTTP status code: 404 (Not Found)
+                return NotFound(new { id = id });
+            }
+
+            // Delete the hero.
+            Hero heroDeleted = _heroService.DeleteHero(id);
+
+            // HTTP status code: 200 (OK)
+            return Ok(heroDeleted);
+            //return Ok(new { id = heroDeleted.ID });
+        }
+
+
+
+        ////[HttpDelete]
+        ////[Route("{id}")]
+        //// REST API path: DELETE /api/heroes/31
+        ////[HttpDelete("{id}")]
+        //[HttpDelete("{id:int}")]
+        //public async Task<IActionResult> Remove(int id)
+        //{
+        //    Hero hero = new Hero { ID = id };
+        //    _logger.LogInformation(hero.ToString());
+
+        //    // Is there a hero with the given ID?
+        //    bool exists = _heroService.ExistsHero(id);
+        //    if (!exists)
+        //    {
+        //        // HTTP status code: 404 (Not Found)
+        //        //return NotFound(hero);
+        //        return NotFound(new { id = hero.ID });
+        //    }
+
+        //    // Delete the hero.
+        //    _heroService.DeleteHero(id);
+
+        //    // HTTP status code 202 (Accepted) is used for queued actions that take a long time to complete.
+        //    //return AcceptedAtAction(nameof(GetList), new { id = hero.ID }, hero);
+        //    // HTTP status code: 200 (OK)
+        //    //return Ok(hero);
+        //    return Ok(new { id = hero.ID });
+        //}
+
+
+
     }
 
 
