@@ -110,6 +110,8 @@ namespace TourOfHeroesBERest.Controllers
 
 
         // REST API path: PUT /api/heroes
+        // Data is in the request body in JSON format.
+        // Therefore, we have an HTTP header of "Content-Type", with a value of "application/json".
         [HttpPut]
         public IActionResult Put(Hero hero)
         {
@@ -174,11 +176,53 @@ namespace TourOfHeroesBERest.Controllers
         //        return NotFound(hero);
         //    }
 
+        //    // Update the hero.
+        //    _heroService.SaveHero(hero);
+
         //    // REST API recommends either a status code of 200 (OK) or 204 (No Content) to be returned.
         //    // HTTP status code: 200 (OK)
         //    //return Ok(hero);
         //    // HTTP status code: 204 (No Content)
         //    return NoContent();
+        //}
+
+
+
+        // REST API path: POST /api/heroes
+        // Data is in the request body in JSON format.
+        // Therefore, we have an HTTP header of "Content-Type", with a value of "application/json".
+        [HttpPost]
+        public IActionResult Post(Hero hero)
+        {
+            _logger.LogInformation(hero.ToString());
+
+            // Add a new hero.
+            Hero newHero = _heroService.SaveHero(hero);
+
+            // HTTP status code: 201 (Created)
+            return Created(this.Request.Path, newHero);
+        }
+
+
+
+        ////public async Task<IActionResult> Add(Hero hero)
+        ////[HttpPost]
+        ////[Route("0")]
+        ////[HttpPost("0")]
+        //// REST API recommends paths with no ID specification.
+        //// Data (properties of a new hero) is taken from the HTML form.
+        //// REST API path: POST /api/heroes
+        //[HttpPost]
+        //public async Task<IActionResult> Add([FromForm] Hero hero)
+        //{
+        //    _logger.LogInformation(hero.ToString());
+
+        //    // Add a new hero.
+        //    _heroService.SaveHero(hero);
+
+        //    // HTTP status code: 201 (Created)
+        //    // HTTP 'Location' header: /detail/{id} containing the new ID, e.g. /detail/100
+        //    return CreatedAtAction(nameof(Load), new { id = hero.ID }, hero);
         //}
 
 

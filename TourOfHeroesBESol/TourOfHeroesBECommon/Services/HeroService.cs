@@ -53,16 +53,22 @@ namespace TourOfHeroesBECommon.Services
 
 
 
-        public void SaveHero(Hero hero)
+        //public void SaveHero(Hero hero)
+        public Hero SaveHero(Hero hero)
         {
+            Hero heroToReturn = hero;
             if (hero.ID == 0)
             {
                 this.heroRepo.Add(hero);
+                List<Hero> listOfHeroesToProcess = (List<Hero>) this.heroRepo.FindList(hero);
+                listOfHeroesToProcess.Sort((h1, h2) => h1.ID - h2.ID);
+                heroToReturn = listOfHeroesToProcess[0];
             }
             else
             {
                 this.heroRepo.Store(hero);
             }
+            return heroToReturn;
         }
 
 
