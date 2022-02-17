@@ -1,6 +1,8 @@
 *.suo
 *.csproj.user
-.vs
-obj
-bin
-packages
+.vs/
+obj/
+bin/
+packages/
+.leu
+
