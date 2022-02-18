@@ -99,30 +99,29 @@ namespace TourOfHeroesBEMain
 
 
 
-        public static void LaunchTestSuite()
+        public void LaunchTestSuite()
         {
 
-            // Display the contents of the user repo.
-            EFMssqlTest test = new EFMssqlTest();
-            test.GetListTest();
+            // Display the contents of the hero repo.
+            this.GetListTest();
             Console.WriteLine();
             Console.WriteLine();
 
-            // Try to add users.
-            test.AddTest();
-            test.GetListTest();
+            // Try to add heroes.
+            this.AddTest();
+            this.GetListTest();
             Console.WriteLine();
             Console.WriteLine();
 
-            // Try to add and remove a user.
-            test.RemoveTest();
-            test.GetListTest();
+            // Try to add and remove a hero.
+            this.RemoveTest();
+            this.GetListTest();
             Console.WriteLine();
             Console.WriteLine();
 
-            // Try to temporarily change a user's password.
-            test.StoreTest();
-            test.GetListTest();
+            // Try to temporarily change a hero's name.
+            this.StoreTest();
+            this.GetListTest();
             Console.WriteLine();
             Console.WriteLine();
 

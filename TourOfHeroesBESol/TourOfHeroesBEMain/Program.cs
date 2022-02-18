@@ -15,9 +15,11 @@ namespace TourOfHeroesBEMain
             //AdodbMssqlTest test = new AdodbMssqlTest();
             //test.ConnectionTest();
 
-            EFMssqlTest.LaunchTestSuite();
+            //EFMssqlTest.LaunchTestSuite();
+            EFMssqlTest efTest = new EFMssqlTest();
+            efTest.LaunchTestSuite();
 
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
         }
 
 
